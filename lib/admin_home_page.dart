@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
 import 'add_admin_page.dart';
+import 'view_admins_page.dart'; // Asigură-te că ai creat această pagină și că o imporți aici
 
 class AdminHomePage extends StatefulWidget {
   final String userName;
@@ -35,6 +36,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
               );
             },
             child: Text("Add Users"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ViewAdminsPage()),
+              );
+            },
+            child: Text("View Admins"),
           ),
           DropdownButton<String>(
             value: _selectedDuration == "Select duration"
