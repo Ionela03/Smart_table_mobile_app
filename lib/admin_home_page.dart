@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
+import 'add_admin_page.dart';
 
 class AdminHomePage extends StatefulWidget {
   final String userName;
@@ -28,7 +29,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ),
           ElevatedButton(
             onPressed: () {
-              // Logic to add users
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddUserPage()),
+              );
             },
             child: Text("Add Users"),
           ),
