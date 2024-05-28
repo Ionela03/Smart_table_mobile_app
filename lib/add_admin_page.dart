@@ -16,7 +16,7 @@ class _AddUserPageState extends State<AddUserPage> {
     try {
       final response = await http.post(
         Uri.parse(
-            'http://192.168.0.104:8080/auth/register'), //change with raspberrypi.local:8080
+            'http://192.168.0.102:8080/auth/register'), //change with raspberrypi.local:8080
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterPage(),
         '/adminHome': (context) => AdminHomePage(
             userName: ModalRoute.of(context)!.settings.arguments as String),
-        '/settings': (context) => SettingsPage(),
+        '/settings': (context) => SettingsPage(
+            currentUsername:
+                ModalRoute.of(context)!.settings.arguments as String),
       },
     );
   }
