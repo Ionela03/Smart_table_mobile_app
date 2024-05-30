@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter/material.dart'; //include widgets și alte functionalitati necesare pentru crearea UI
+import 'package:http/http.dart'
+    as http; //utilizata pentru a face cereri la serverul web
+import 'dart:convert'; //utilizata la conversia datelor (encode, decode JSON)
 
 class LoginPage extends StatefulWidget {
   @override
@@ -51,28 +52,70 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
       body: SingleChildScrollView(
-        // Încapsulează în SingleChildScrollView pentru a permite derularea
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Username'),
-              ),
-              TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-              ),
-              ElevatedButton(
-                onPressed: _login,
-                child: Text('Login'),
-              ),
-              SizedBox(height: 20),
-              Text(_errorMessage, style: TextStyle(color: Colors.red)),
-            ],
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Welcome to Smart Table!',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20),
+                Image.asset(
+                  'lib/assets/login_page.jpg',
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(height: 20),
+                TextField(
+                  key: Key('username'),
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  key: Key('password'),
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _login,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 217, 207, 235),
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: Text('Login'),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  _errorMessage,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ],
+            ),
           ),
         ),
       ),

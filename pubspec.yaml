@@ -1,4 +1,4 @@
-name: my_app
+name: smart_table
 description: "A new Flutter project."
 publish_to: 'none'  # This prevents accidental publishing to pub.dev.
 
@@ -14,9 +14,10 @@ dependencies:
   provider: ^6.0.0
   http: ^1.2.1
   flutter_secure_storage: ^9.2.2
-
-  # Uncomment the line below and add a proper version if you plan to use http_certificate_pinning
-  # http_certificate_pinning: ^version_here
+  rename: ^2.0.1
+ 
+flutter_launcher_name:
+  name: "Smart Table"
 
 dev_dependencies:
   flutter_test:
@@ -25,3 +26,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+  - lib\assets\home_page.jpg
+  - lib\assets\view_admins_page.jpg
+  - lib\assets\settings_page.jpg
+  - lib\assets\login_page.jpg
+  - lib\assets\add_admins_page.jpg
+

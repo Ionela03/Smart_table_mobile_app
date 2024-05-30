@@ -67,23 +67,33 @@ class _ViewAdminsPageState extends State<ViewAdminsPage> {
       appBar: AppBar(
         title: Text("View Admins"),
       ),
-      body: ListView.builder(
-        itemCount: _admins.length,
-        itemBuilder: (context, index) {
-          bool isSuperAdmin =
-              widget.currentUser == 'admin'; // Superadmin's username
-          bool isNotSelf =
-              _admins[index] != widget.currentUser; // To prevent self-deletion
-          return ListTile(
-            title: Text(_admins[index]),
-            trailing: (isSuperAdmin && isNotSelf)
-                ? IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () => _deleteAdmin(_admins[index]),
-                  )
-                : null,
-          );
-        },
+      body: Column(
+        children: [
+          Image.asset(
+            'lib/assets/view_admins_page.jpg',
+            fit: BoxFit.contain,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _admins.length,
+              itemBuilder: (context, index) {
+                bool isSuperAdmin =
+                    widget.currentUser == 'admin'; // Superadmin's username
+                bool isNotSelf = _admins[index] !=
+                    widget.currentUser; // To prevent self-deletion
+                return ListTile(
+                  title: Text(_admins[index]),
+                  trailing: (isSuperAdmin && isNotSelf)
+                      ? IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => _deleteAdmin(_admins[index]),
+                        )
+                      : null,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

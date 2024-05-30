@@ -16,7 +16,7 @@ class _AddUserPageState extends State<AddUserPage> {
     try {
       final response = await http.post(
         Uri.parse(
-            'http://192.168.0.102:8080/auth/register'), //change with raspberrypi.local:8080
+            'http://192.168.0.102:8080/auth/register'), // change with raspberrypi.local:8080
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -45,26 +45,64 @@ class _AddUserPageState extends State<AddUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add User")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: _addUser,
-              child: Text('Add User'),
-            ),
-            Text(_message),
-          ],
+      appBar: AppBar(title: Text("Add Admin")),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Image.asset(
+                'lib/assets/add_admins_page.jpg',
+                fit: BoxFit.contain,
+              ),
+              SizedBox(height: 20),
+              TextField(
+                key: Key('Username'),
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.8),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              TextField(
+                key: Key('Password'),
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.8),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _addUser,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 217, 207, 235),
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: Text('Add Admin'),
+              ),
+              SizedBox(height: 20),
+              Text(
+                _message,
+                style: TextStyle(color: Colors.red),
+              ),
+            ],
+          ),
         ),
       ),
     );

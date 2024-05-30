@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MY_APP',
+      debugShowCheckedModeBanner: false,
+      title: 'Smart Table',
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),

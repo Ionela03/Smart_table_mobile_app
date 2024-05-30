@@ -70,12 +70,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin Home"),
+        title: Text("Home"),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
-              // Navighează înapoi la pagina de login
+              // Navigate back to login page
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LoginPage()),
@@ -85,72 +85,82 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text("Welcome, ${widget.userName}!",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text("Welcome, ${widget.userName}!",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              ),
+              Image.asset(
+                'lib/assets/home_page.jpg',
+                fit: BoxFit.contain,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddUserPage()),
+                  );
+                },
+                child: Text("Add Admins"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ViewAdminsPage(currentUser: widget.userName),
+                    ),
+                  );
+                },
+                child: Text("View Admins"),
+              ),
+              DropdownButton<String>(
+                value: _selectedDuration == "Select duration"
+                    ? null
+                    : _selectedDuration,
+                hint: Text("Select duration"),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedDuration = newValue!;
+                  });
+                },
+                items: <String>['1 hour', '2 minutes', '2 hours', 'Unlimited']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              ElevatedButton(
+                onPressed: _setRunTime,
+                child: Text('Set Run Time'),
+              ),
+              SizedBox(height: 10),
+              Text(_message, style: TextStyle(color: Colors.red)),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SettingsPage(currentUsername: widget.userName),
+                    ),
+                  );
+                },
+                child: Text('Settings'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddUserPage()),
-              );
-            },
-            child: Text("Add Users"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ViewAdminsPage(currentUser: widget.userName),
-                ),
-              );
-            },
-            child: Text("View Admins"),
-          ),
-          DropdownButton<String>(
-            value: _selectedDuration == "Select duration"
-                ? null
-                : _selectedDuration,
-            hint: Text("Select duration"),
-            onChanged: (String? newValue) {
-              setState(() {
-                _selectedDuration = newValue!;
-              });
-            },
-            items: <String>['1 hour', '2 minutes', '2 hours', 'Unlimited']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          ElevatedButton(
-            onPressed: _setRunTime,
-            child: Text('Set Run Time'),
-          ),
-          SizedBox(height: 10),
-          Text(_message, style: TextStyle(color: Colors.red)),
-          Spacer(),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      SettingsPage(currentUsername: widget.userName),
-                ),
-              );
-            },
-            child: Text('Settings'),
-          ),
-        ],
+        ),
       ),
     );
   }

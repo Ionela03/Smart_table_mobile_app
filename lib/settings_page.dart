@@ -59,41 +59,78 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text("Update your credentials"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            TextField(
-              controller: _currentPasswordController,
-              decoration: InputDecoration(
-                labelText: 'Current Password',
-                helperText: 'Enter your current password',
+            Image.asset(
+              'lib/assets/settings_page.jpg',
+              fit: BoxFit.contain,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _currentPasswordController,
+                    decoration: InputDecoration(
+                      labelText: 'Current Password',
+                      helperText: 'Enter your current password',
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.8),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 10), // Add space here
+                  TextField(
+                    controller: _newUsernameController,
+                    decoration: InputDecoration(
+                      labelText: 'New Username',
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.8),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10), // Add space here
+                  TextField(
+                    controller: _newPasswordController,
+                    decoration: InputDecoration(
+                      labelText: 'New Password',
+                      helperText: 'Enter a strong password',
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.8),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _updateCredentials,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 217, 207, 235),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Text('Update Credentials'),
+                  ),
+                  SizedBox(height: 10),
+                  Text(_updateMessage, style: TextStyle(color: Colors.red)),
+                ],
               ),
-              obscureText: true,
             ),
-            TextField(
-              controller: _newUsernameController,
-              decoration: InputDecoration(
-                labelText: 'New Username',
-              ),
-            ),
-            TextField(
-              controller: _newPasswordController,
-              decoration: InputDecoration(
-                labelText: 'New Password',
-                helperText: 'Enter a strong password',
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _updateCredentials,
-              child: Text('Update Settings'),
-            ),
-            SizedBox(height: 10),
-            Text(_updateMessage, style: TextStyle(color: Colors.red)),
           ],
         ),
       ),
