@@ -26,7 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.0.102:8080/auth/update_credentials'),
+        Uri.parse('http://192.168.0.103:8080/auth/update_credentials'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': basicAuth,

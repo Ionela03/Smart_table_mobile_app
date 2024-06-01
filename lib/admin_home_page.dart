@@ -31,8 +31,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
       case '2 hours':
         runTimeMinutes = 120;
         break;
-      case 'Unlimited':
-        runTimeMinutes = 0;
+      case '30 minutes':
+        runTimeMinutes = 30;
         break;
       default:
         runTimeMinutes = 0;
@@ -40,7 +40,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.0.102:8080/set_runtime'),
+        Uri.parse('http://192.168.0.103:8080/set_runtime'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -131,7 +131,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     _selectedDuration = newValue!;
                   });
                 },
-                items: <String>['1 hour', '2 minutes', '2 hours', 'Unlimited']
+                items: <String>['1 hour', '2 minutes', '2 hours', '30 minutes']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

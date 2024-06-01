@@ -12,7 +12,7 @@ class ViewAdminsPage extends StatefulWidget {
 }
 
 class _ViewAdminsPageState extends State<ViewAdminsPage> {
-  List<String> _admins = [];
+  List<Map<String, dynamic>> _admins = [];
 
   @override
   void initState() {
@@ -23,15 +23,16 @@ class _ViewAdminsPageState extends State<ViewAdminsPage> {
   void _fetchAdmins() async {
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.0.102:8080/get/admins'),
+        Uri.parse('http://192.168.0.103:8080/get/admins'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
       if (response.statusCode == 200) {
         setState(() {
-          _admins =
-              List<String>.from(json.decode(response.body) as List<dynamic>);
+          _admins = List<Map<String, dynamic>>.from(json
+              .decode(response.body)
+              .map((data) => {'username': data['username'], 'id': data['id']}));
         });
       } else {
         throw Exception('Failed to load admins');
@@ -41,10 +42,10 @@ class _ViewAdminsPageState extends State<ViewAdminsPage> {
     }
   }
 
-  void _deleteAdmin(String adminUsername) async {
+  void _deleteAdmin(int adminId) async {
     try {
       final response = await http.delete(
-        Uri.parse('http://192.168.0.102:8080/admin/delete/$adminUsername'),
+        Uri.parse('http://192.168.0.103:8080/admin/delete/$adminId'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -79,14 +80,14 @@ class _ViewAdminsPageState extends State<ViewAdminsPage> {
               itemBuilder: (context, index) {
                 bool isSuperAdmin =
                     widget.currentUser == 'admin'; // Superadmin's username
-                bool isNotSelf = _admins[index] !=
-                    widget.currentUser; // To prevent self-deletion
+                bool isNotSelf = _admins[index]['username'] !=
+                    widget.currentUser; // Prevent self-deletion
                 return ListTile(
-                  title: Text(_admins[index]),
+                  title: Text(_admins[index]['username']),
                   trailing: (isSuperAdmin && isNotSelf)
                       ? IconButton(
                           icon: Icon(Icons.delete),
-                          onPressed: () => _deleteAdmin(_admins[index]),
+                          onPressed: () => _deleteAdmin(_admins[index]['id']),
                         )
                       : null,
                 );

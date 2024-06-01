@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       final response = await http.post(
         Uri.parse(
-            'http://192.168.0.102:8080/auth/login'), //here I have to update with raspberrypi.local instead of IP adress
+            'http://192.168.0.103:8080/auth/login'), //here I have to update with raspberrypi.local instead of IP adress
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
