@@ -11,9 +11,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String _errorMessage = '';
 
   void _register() {
-    // Această funcție poate fi actualizată ulterior pentru a include logica de înregistrare
     print("Register attempt: ${_usernameController.text}");
-    // Doar pentru test, să vedem că inputurile sunt colectate corect
   }
 
   @override

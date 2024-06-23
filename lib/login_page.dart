@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart'; //include widgets și alte functionalitati necesare pentru crearea UI
-import 'package:http/http.dart'
-    as http; //utilizata pentru a face cereri la serverul web
-import 'dart:convert'; //utilizata la conversia datelor (encode, decode JSON)
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,8 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   void _login() async {
     try {
       final response = await http.post(
-        Uri.parse(
-            'http://raspberrypi.local:8080/auth/login'), //here I have to update with raspberrypi.local instead of IP adress
+        Uri.parse('http://raspberrypi.local:8080/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -28,19 +26,16 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 200) {
-        // Navighează către pagina de Home a adminului dacă login-ul este reușit
         Navigator.pushReplacementNamed(context, '/adminHome',
             arguments: _usernameController.text);
       } else {
-        // Afișează mesajul de eroare primit de la server
         setState(() {
           _errorMessage =
               json.decode(response.body)['message'] ?? "Unknown error";
         });
       }
     } catch (e) {
-      print(
-          'Eroare întâmpinată: $e'); // Afișează eroarea în consolă pentru depanare
+      print('Eroare întâmpinată: $e');
       setState(() {
         _errorMessage = "Network issue or server error! Details: $e";
       });
