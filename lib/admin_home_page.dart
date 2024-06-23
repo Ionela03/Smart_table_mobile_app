@@ -40,7 +40,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.0.103:8080/set_runtime'),
+        Uri.parse('http://raspberrypi.local:8080/set_runtime'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

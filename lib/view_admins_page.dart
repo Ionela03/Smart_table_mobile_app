@@ -23,7 +23,7 @@ class _ViewAdminsPageState extends State<ViewAdminsPage> {
   void _fetchAdmins() async {
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.0.103:8080/get/admins'),
+        Uri.parse('http://raspberrypi.local:8080/get/admins'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -45,7 +45,7 @@ class _ViewAdminsPageState extends State<ViewAdminsPage> {
   void _deleteAdmin(int adminId) async {
     try {
       final response = await http.delete(
-        Uri.parse('http://192.168.0.103:8080/admin/delete/$adminId'),
+        Uri.parse('http://raspberrypi.local:8080/admin/delete/$adminId'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
